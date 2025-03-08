@@ -1,19 +1,29 @@
-// import { useState } from 'react'
 import './index.css'
-import { NavBar, Hero, Changes, Footer } from './components'
-import MainAppSection from './container.jsx/MainAppSection'
+import { NavBar, AllocationForm, ExpenseList, Footer } from './components'
+import Hero from './container/Hero'
 
 function App() {
-  // const [count, setCount] = useState(0)
 
   return (
-    <main className='w-full bg-yellow-200 min-h-screen px-4'>
-      <NavBar />
-      <Hero />
-      <MainAppSection />
-      <Changes />
-      <Footer />
-    </main>
+      <div className='dark '>
+      <div className='w-full bg-[#F5EFDB] min-h-screen px-4 flex flex-col  overflow-y-auto'>
+        <NavBar />
+        <Hero />
+        <div className="flex">
+          <h3 className="text-4xl font-semibold my-5 max-sm:text-xl">Allocation</h3>
+        </div>
+        <div className='flex'>
+          <ExpenseList />
+        </div >
+        <div className="mb-6">
+          <AllocationForm />
+        </div>
+      </div>
+
+      <div className=' min-w-full'>
+        <Footer />
+      </div>
+      </div>
   )
 }
 

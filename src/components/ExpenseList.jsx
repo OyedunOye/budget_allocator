@@ -1,28 +1,37 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import { AppContext } from "../context/AppContext";
 import { MdOutlineClose } from "react-icons/md";
 
-const ExpenseList = (props) => {
-    const { expenses, dispatch, currency } = useContext(AppContext)
-    // console.log (expenses)
-    const handleDeleteExpense = ()=> {
+const ExpenseList = () => {
+    const { state, dispatch, remaining } = useContext(AppContext)
+    // console.log ("Rendered state.expenses:", state.expenses)
+
+    const total_spent =()=> state.expenses.reduce(
+        (previousExpense, currrentExpense)=> previousExpense + currrentExpense.cost, 0) + 10
+
+    const handleDeleteExpense = (id)=> {
+
         dispatch({
             type: "DELETE_EXPENSE",
-            payload: expenses.id
+            payload: id
         })
     }
 
     const increaseAllocation = (name) => {
-        const expense = {
-            name: name,
-            cost:10
-        }
+        let total = total_spent()
+        console.log(total)
+        if (total <= state.budget) {
+            const expense = {
+                name: name,
+                cost:10
+            }
 
-        dispatch({
-            type:"ADD_EXPENSE",
-            payload: expense
-        })
-    }
+            dispatch({
+                type:"ADD_EXPENSE",
+                payload: expense
+            })
+        } else {alert("Out of funds, cannot increase the allocation!")}
+}
     const decreaseAllocation = (name) => {
         const expense = {
             name: name,
@@ -48,16 +57,17 @@ const ExpenseList = (props) => {
                 </tr>
             </thead>
             <tbody className="">
-                {expenses.map((expense)=>
+                {state.expenses.map((expense)=>(
                     <tr key={expense.name} className="py-3 h-12">
                         <td className="">{expense.name}</td>
-                        <td>{currency}{expense.cost}</td>
-                        <td ><button onClick={(e)=>increaseAllocation(expense.name)} className="flex text-white border w-8 h-8 mt-2 rounded-md bg-green-500 hover:bg-green-300 justify-center items-center"> + </button></td>
-                        <td ><button onClick={(e)=>decreaseAllocation(expense.name)} className="flex text-white border w-8 h-8 mt-2 rounded-md bg-red-500 hover:bg-red-300 justify-center items-center"> - </button></td>
-                        <td><button><MdOutlineClose className="flex border text-white w-6 h-6 mt-3 rounded-full bg-black hover:bg-red-300 justify-center items-center" onClick={handleDeleteExpense} /></button></td>
+                        <td>{state.currency}{expense.cost}</td>
+                        <td ><button onClick={()=>increaseAllocation(expense.name)} className="flex text-white border w-8 h-8 mt-2 rounded-md bg-green-500 hover:bg-green-300 justify-center items-center"> + </button></td>
+                        <td ><button onClick={()=>decreaseAllocation(expense.name)} className="flex text-white border w-8 h-8 mt-2 rounded-md bg-red-500 hover:bg-red-300 justify-center items-center"> - </button></td>
+                        <td><button><MdOutlineClose className="flex border text-white w-6 h-6 mt-3 rounded-full bg-black hover:bg-red-300 justify-center items-center" onClick={()=>handleDeleteExpense(expense.id)} /></button></td>
+
                     </tr>
 
-                )}
+                ))}
             </tbody>
         </table>
 
@@ -65,4 +75,4 @@ const ExpenseList = (props) => {
     )
 }
 
-export default ExpenseList
+export default memo(ExpenseList)
