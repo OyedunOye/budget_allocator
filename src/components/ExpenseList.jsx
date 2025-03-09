@@ -51,8 +51,8 @@ const ExpenseList = () => {
                 <tr >
                     <th className="">Category</th>
                     <th className="">Allocated Budget</th>
-                    <th className="">Increase by 10</th>
-                    <th className="">Decrease by 10</th>
+                    <th className="">Minus 10</th>
+                    <th className="">Plus 10</th>
                     <th className="">Delete</th>
                 </tr>
             </thead>
@@ -75,4 +75,4 @@ const ExpenseList = () => {
     )
 }
 
-export default memo(ExpenseList)
+export default ExpenseList

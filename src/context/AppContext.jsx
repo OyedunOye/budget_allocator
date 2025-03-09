@@ -46,6 +46,14 @@ export const AppReducer = (state, action) => {
             ...state,
             currency: action.payload
         }
+        // I would like to enable user to remove unwanted category from the table list and add new ones from the drop down list
+        //as they wifh. Need to figure out how to do this. Need to set action invoker in AllocationForm for this purpose too.
+    case 'ADD_ALLOCATION':
+        return {
+            ...state,
+            expenses: state.expenses.push(action.payload)
+        };
+
 
     default:
         return state;
@@ -59,7 +67,7 @@ const initialState = {
         { id: "Transport", name: 'Transport', cost: 50 },
         { id: "House Rent", name: 'House Rent', cost: 200 },
         { id: "Food", name: 'Food', cost: 70 },
-        { id: "Hygiene product", name: 'Hygiene product', cost: 40 },
+        { id: "Hygiene Product", name: 'Hygiene Product', cost: 40 },
         { id: "Shopping", name: 'Shopping', cost: 350 },
         { id: "Gift", name: 'Gift', cost: 100 },
         { id: "Miscellaneous", name: 'Miscellaneous', cost: 150 },

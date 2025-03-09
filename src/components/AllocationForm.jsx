@@ -1,16 +1,20 @@
 import { useContext, useState } from "react"
 import { AppContext } from "../context/AppContext"
 
-const AllocationForm = (props) => {
-  const {dispatch, remaining, currency} = useContext(AppContext)
+const AllocationForm = () => {
+  const {state, dispatch, remaining} = useContext(AppContext)
   const [name, setName] = useState("")
   const [cost, setCost] = useState("")
   const [action, setAction] = useState("")
 
   const submitEvent = () => {
+
+    let allocatedNames = state.expenses.map(item=>item.name)
+    console.log(allocatedNames)
+
     console.log(remaining)
-    if(cost > remaining) {
-      alert(`The value cannot exceed remaining funds ${currency}` + remaining)
+    if(action==="Add" && cost > remaining) {
+      alert(`The cost cannot exceed remaining funds ${state.currency}` + remaining)
       setCost('')
       return
     }
@@ -26,12 +30,29 @@ const AllocationForm = (props) => {
         type: "RED_EXPENSE",
         payload: expense
       })
-    } else {
+    }
+
+    if (action === "Add" && allocatedNames.includes(name)) {
       dispatch({
         type: "ADD_EXPENSE",
         payload: expense
       })
+
     }
+
+    // if (action === "Add" && !(allocatedNames.includes(name))){
+    //   const payload = {
+    //     id:name,
+    //     name: name,
+    //     cost: parseInt(cost)
+    //   }
+    //   console.log(payload)
+
+    //   dispatch({
+    //     type: "ADD_ALLOCATION",
+    //     payload: payload
+    //   })
+    // }
   }
 
   return (
@@ -44,7 +65,7 @@ const AllocationForm = (props) => {
             <label htmlFor="inputGroupSelect01" className="text-2xl bg-slate-300 w-32 p-3 rounded-sm flex items-center max-md:text-sm md:text-xl">Category</label>
 
             <select className="border w-48 bg-white border-slate-300 text-2xl pl-2 max-md:text-sm md:text-xl" name="" id="inputGroupSelect01" onChange={(e)=> setName(e.target.value)}>
-              {/* {console.log(name)} */}
+              {console.log( state.expenses.map((item)=>item.name))}
               <option defaultValue>Choose...</option>
               <option value="House Rent" name="House Rent" className="">House Rent</option>
               <option value="Food" name="Food" className="">Food</option>
@@ -69,7 +90,7 @@ const AllocationForm = (props) => {
           <input className="border bg-white border-slate-300 text-2xl w-44 h-10 max-md:text-sm md:text-xl p-2" required='required' type='number' id="cost" value={cost} step={10} onChange={(e)=>setCost(e.target.value)} />
           {console.log(cost)}
 
-          <button onClick={submitEvent} className="bg-blue-600 w-20 text-white rounded-md h-10 max-md:text-sm md:text-xl"> Save </button>
+          <button onClick={()=>submitEvent()} className="bg-blue-600 w-20 text-white rounded-md h-10 max-md:text-sm md:text-xl"> Save </button>
         </div>
     </div>
   )
