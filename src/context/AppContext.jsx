@@ -23,8 +23,6 @@ export const AppReducer = (state, action) => {
 
 
     case 'DELETE_EXPENSE':
-
-        console.log(action.payload)
         return{
             ...state,
             expenses: state.expenses.map(expense=>expense.id === action.payload?
@@ -41,18 +39,24 @@ export const AppReducer = (state, action) => {
         }
 
     case 'CHANGE_CURRENCY':
-        state.currency = action.payload
+        // state.currency = action.payload
         return {
             ...state,
             currency: action.payload
         }
-        // I would like to enable user to remove unwanted category from the table list and add new ones from the drop down list
-        //as they wifh. Need to figure out how to do this. Need to set action invoker in AllocationForm for this purpose too.
+
+        // Adds new expense item to the allocation table by choosing ones not already in the table from the drop down list
     case 'ADD_ALLOCATION':
         return {
             ...state,
-            expenses: state.expenses.push(action.payload)
+            expenses: [...state.expenses, action.payload]
         };
+
+    case 'REMOVE_ALLOCATION':
+        return {
+            ...state,
+            expenses: state.expenses.filter(expense=>expense.id !== action.payload)
+        }
 
 
     default:
@@ -66,8 +70,8 @@ const initialState = {
     expenses: [
         { id: "Transport", name: 'Transport', cost: 50 },
         { id: "House Rent", name: 'House Rent', cost: 200 },
-        { id: "Food", name: 'Food', cost: 70 },
-        { id: "Hygiene Product", name: 'Hygiene Product', cost: 40 },
+        // { id: "Food", name: 'Food', cost: 70 },
+        // { id: "Hygiene Product", name: 'Hygiene Product', cost: 40 },
         { id: "Shopping", name: 'Shopping', cost: 350 },
         { id: "Gift", name: 'Gift', cost: 100 },
         { id: "Miscellaneous", name: 'Miscellaneous', cost: 150 },
@@ -76,11 +80,8 @@ const initialState = {
     currency: '€'
 };
 
-//create the context. This is the cthing the components import and use to get the state
+//create the context. This is the thing that the components import and use to get the state
 export const AppContext = createContext()
-
-//another context that updates state with new calculated values gotten from reducer
-// export const AppDispatchContext = createContext()
 
 //need a provider component which wraps the components we want to give access to the state.
 //It accepts the children, which are the nested(wrapped) components
@@ -96,7 +97,7 @@ export const AppProvider = ({ children }) => {
         remaining = state.budget - totalExpenses
     }
 
-    console.log("AppProvider State:", state);
+    // console.log("AppProvider State:", state);
     return(
         <AppContext.Provider
             value={{
@@ -105,9 +106,7 @@ export const AppProvider = ({ children }) => {
                 remaining
             }}
         >
-            {/* <AppDispatchContext> */}
-                {children}
-            {/* </AppDispatchContext> */}
+            {children}
         </AppContext.Provider>
     )
 }
