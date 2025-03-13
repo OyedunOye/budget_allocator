@@ -59,6 +59,18 @@ export const AppReducer = (state, action) => {
         }
 
 
+    case 'DARK_MODE':
+        return {
+            ...state,
+            displayMode: action.payload
+        }
+
+    case 'LIGHT_MODE':
+        return {
+            ...state,
+            displayMode: action.payload
+        }
+
     default:
         return state;
   }
@@ -77,6 +89,7 @@ const initialState = {
         { id: "Miscellaneous", name: 'Miscellaneous', cost: 150 },
         { id: "Save/Invest", name: 'Save/Invest', cost: 300 },
     ],
+    displayMode: 'light',
     currency: '€'
 };
 
