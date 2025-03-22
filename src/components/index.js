@@ -6,6 +6,7 @@ import Remaining from "./Remaining";
 import ExpenseList from "./ExpenseList";
 import AllocationForm from "./AllocationForm";
 import Currency from "./Currency";
+import Instructions from "./Instructions";
 
 export {
     Footer,
@@ -15,5 +16,6 @@ export {
     Remaining,
     ExpenseList,
     AllocationForm,
-    Currency
+    Currency,
+    Instructions
 }
