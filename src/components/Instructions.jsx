@@ -16,12 +16,12 @@ const Instructions = () => {
         {
             title: "Remaining budget display",
             image: remaining,
-            description: "The portion of budget remaining after deduction the already allocated portion of the budget is automatically computed and shown here."
+            description: "The portion of budget remaining after deduction the already allocated portion of the budget is automatically computed and shown here. As an additional indicator to help you visualize what is going on, this is displayed in green banner when you still have above 80% of your budget at your disposal. The banner turns red to signify the remaining amount is less than 20% of your budget."
         },
         {
             title: "Total spent so far display",
             image: spent,
-            description: "The sum of already allocated amount of money is calculated for you and displayed here. As an additional indicator to help you visualize what is going on, this is displayed in green banner when you have spent below 80% of your budget. The banner turns red to signify the remaining amount is less than 20% of your budget."
+            description: "The sum of already allocated amount of money is calculated for you and displayed here."
         },
         {
             title: "Budget currency choice",

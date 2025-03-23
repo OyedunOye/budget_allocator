@@ -1,12 +1,50 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Project Title
 
-Currently, two official plugins are available:
+A budget app that provides you the flexibily to split your budget into different expense categories of your choice. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Authors
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [@'Sade](https://github.com/OyedunOye)
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/OyedunOye/budget_allocator
+```
+
+Go to the project directory
+
+```bash
+  cd budget_allocator
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+
+## Features
+
+- Light/dark mode toggle
+- Mobile responsive UI
+- [Live preview](https://budget-allocator-5m57i98fm-oluwasade-oyesinas-projects.vercel.app/)
+
+
+## Tech Stack
+
+**Client:** React + Vite, Redux, TailwindCSS
+
+
