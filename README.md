@@ -40,7 +40,7 @@ Start the server
 
 - Light/dark mode toggle
 - Mobile responsive UI
-- [Live preview](https://budget-allocator-5m57i98fm-oluwasade-oyesinas-projects.vercel.app/)
+- [Live preview](https://budget-allocator-taupe.vercel.app)
 
 
 ## Tech Stack
