@@ -5,7 +5,7 @@ const AllocationForm = (props) => { //removing props from the argument renders t
   const {dispatch, remaining, state} = useContext(AppContext)
   const [name, setName] = useState("")
   const [cost, setCost] = useState("")
-  const [action, setAction] = useState("")
+  const [action, setAction] = useState("Add")
 
   const submitEvent = () => {
     const allocatedNames =()=> state.expenses.map(item=>item.name)
@@ -47,13 +47,18 @@ const AllocationForm = (props) => { //removing props from the argument renders t
           type: "ADD_ALLOCATION",
           payload: expense
         })
-        return
       } else if(action === "Reduce") {
         alert("You cannot reduce the cost for an allocation category which is not already existing in the allocation table! Choose Add to include a new allocation category in the table.")
       }
     }
+
   }
 
+  // const handleSubmit=()=> {
+  //   console.log("Working!")
+  // }
+
+  // console.log(action)
   return (
     <div className="flex my-2 flex-col">
         <h3 className={`text-4xl font-semibold my-5 max-sm:text-xl ${state.displayMode==='dark'?"text-white":""}`}>Change Allocation</h3>
@@ -68,8 +73,9 @@ const AllocationForm = (props) => { //removing props from the argument renders t
               <option value="Hygiene Products" name="Hygiene Product" className="">Hygiene Product</option>
               <option value="Shopping" name="Shopping" className="">Shopping</option>
               <option value="Transport" name="Transport" className="">Transport</option>
-              <option value="Gift/Charity" name="Gift" className="">Gift/Charity</option>
               <option value="Save/Invest" name="Save/Invest" className="">Save/Invest</option>
+              <option value="Gift" name="Gift" className="">Gift</option>
+              <option value="Charity Donations" name="Charity Donations" className="">Charity Donations</option>
               <option value="Partying" name="Partying" className="">Partying</option>
               <option value="Traveling" name="Traveling" className="">Traveling</option>
               <option value="Sport" name="Sport" className="">Sport</option>
@@ -90,7 +96,7 @@ const AllocationForm = (props) => { //removing props from the argument renders t
             <input className="border bg-white border-slate-300 text-2xl w-40 h-10 max-md:text-sm md:text-xl p-2" required='required' type='number' id="cost" value={cost} step={10} onChange={(e)=>setCost(e.target.value)} />
           </div>
 
-          <button onClick={()=>submitEvent()} className="bg-blue-600 hover:bg-blue-500 cursor-pointer w-20 text-white rounded-md h-10 max-md:text-sm md:text-xl"> Save </button>
+          <button onClick={submitEvent} className="bg-blue-600 hover:bg-blue-500 cursor-pointer w-20 text-white rounded-md h-10 max-md:text-sm md:text-xl"> Save </button>
         </div>
     </div>
   )
