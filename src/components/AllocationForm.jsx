@@ -16,6 +16,16 @@ const AllocationForm = (props) => { //removing props from the argument renders t
       return
     }
 
+    if(!parseInt(cost)) {
+      alert("The amount field not be blank or contain a other types of input other than numbers. Please enter an integer in multiples of 10 in this field.")
+      return
+    }
+
+    if(name === "") {
+      alert("The category cannot be blank. Please choose a valid category from the drop-down list.")
+      return
+    }
+
     if (namesList.includes(name)){
       const expense = {
         name: name,
@@ -67,7 +77,7 @@ const AllocationForm = (props) => { //removing props from the argument renders t
             <label htmlFor="inputGroupSelect01" className="text-2xl bg-slate-300 w-28 p-3 rounded-sm flex items-center max-md:text-sm md:text-xl">Category</label>
 
             <select className="border w-40 bg-white border-slate-300 text-2xl pl-2 max-md:text-sm md:text-xl" name="" id="inputGroupSelect01" onChange={(e)=> setName(e.target.value)}>
-              <option defaultValue>Choose...</option>
+              <option defaultValue="">Choose...</option>
               <option value="House Rent" name="House Rent" className="">House Rent</option>
               <option value="Food" name="Food" className="">Food</option>
               <option value="Hygiene Products" name="Hygiene Product" className="">Hygiene Product</option>
