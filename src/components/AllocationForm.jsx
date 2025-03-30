@@ -17,11 +17,11 @@ const AllocationForm = (props) => { //removing props from the argument renders t
     }
 
     if(!parseInt(cost)) {
-      alert("The amount field not be blank or contain a other types of input other than numbers. Please enter an integer in multiples of 10 in this field.")
+      alert("The amount field not be blank and can only be a number. Please enter an integer in multiples of 10 in this field.")
       return
     }
 
-    if(name === "") {
+    if(name === "" || name === "Choose...") {
       alert("The category cannot be blank. Please choose a valid category from the drop-down list.")
       return
     }
